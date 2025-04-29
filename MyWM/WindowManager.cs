@@ -50,11 +50,10 @@ private static readonly IntPtr HWND_TOP = IntPtr.Zero;
         private readonly List<IManagedWindow> _managedWindows = new();
         private readonly IWindowLayout _layout;
         
-            private void OnWindowCreated(IntPtr hwnd)
+            public void OnWindowCreated(ManagedWindow hwnd)
     {
         // You can wrap this HWND using your ManagedWindow class
-        var win = new ManagedWindow(hwnd); // You must implement this
-        _managedWindows.Add(win);
+        _managedWindows.Add(hwnd);
         ApplyLayout();
     }
 

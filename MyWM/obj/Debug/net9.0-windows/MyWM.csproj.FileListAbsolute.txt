@@ -16,3 +16,4 @@ C:\Users\curti\Documents\projects\WindowManager\MyWM\obj\Debug\net9.0-windows\re
 C:\Users\curti\Documents\projects\WindowManager\MyWM\obj\Debug\net9.0-windows\MyWM.pdb
 C:\Users\curti\Documents\projects\WindowManager\MyWM\obj\Debug\net9.0-windows\MyWM.genruntimeconfig.cache
 C:\Users\curti\Documents\projects\WindowManager\MyWM\obj\Debug\net9.0-windows\ref\MyWM.dll
+C:\Users\curti\Documents\projects\WindowManager\MyWM\obj\Debug\net9.0-windows\MyWM.sourcelink.json

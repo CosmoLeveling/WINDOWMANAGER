@@ -1,38 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using MyWM;
-using MyWM.Layouts;
+using MyWM.Layouts; // Import the layouts
 
-class Program
+namespace MyWM
 {
-    
-    static void Main()
+    class Program
     {
-        WindowEventHook windowEventHook = new WindowEventHook();
-        // Create the VerticalStackLayout layout
-        var layout = new ProportionalHorizontalLayout();
-
-        // Create the WindowManager and pass the layout
-        var wm = new WindowManager(layout);
-
-        // Create a list of windows (implement IManagedWindow)
-        var windows = new List<IManagedWindow>
+        static void Main(string[] args)
         {
-        };
-        // Define the monitor bounds (Rect) where windows will be arranged
-        var monitorBounds = Screen.PrimaryScreen.Bounds; // Example: 800x600 screen
-        Rect rect = new Rect(0,0, monitorBounds.Width,monitorBounds.Height);
-        // Use the WindowManager to arrange the windows
-        wm.ArrangeWindows(windows, rect);
+            // Create an event hook and window manager with a layout
+            var eventHook = new WindowEventHook();
+            var manager = new WindowManager(new HorizontalStackLayout()); // Use HorizontalStackLayout initially
 
-        // Start the WindowManager
-        wm.Start();
+            // Event handler when a new window is created
+            eventHook.WindowCreated += hwnd =>
+            {
+                Console.WriteLine($"New window detected: {hwnd}");
 
-        Console.WriteLine("Window Manager running. Press any key to exit.");
-        Console.ReadKey();
+                // Wrap the HWND into ManagedWindow and add it to the manager
+                var managedWindow = new ManagedWindow(hwnd);
+                manager.OnWindowCreated(managedWindow);
+            };
 
-        // Stop the WindowManager
-        wm.Stop();
+            // Start listening for window creation events
+            eventHook.Start();
+
+            // Optionally, change layout after some time or based on user input
+            // manager.SetLayout(new VerticalStackLayout()); // Uncomment this to switch to vertical layout
+
+            Console.WriteLine("Window manager running. Press Enter to exit.");
+            Console.ReadLine(); // Keeps app alive
+        }
     }
 }
